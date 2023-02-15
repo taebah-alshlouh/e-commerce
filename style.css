@@ -114,6 +114,7 @@ h4{
     display: flex;
     flex-direction: column;
     gap: 1em;
+    padding-left: 0%;
 }
 .main-links a:hover {
     color: var(--secondary-color);
@@ -333,7 +334,7 @@ nav .fly-item,
     z-index: 1;
 }
 /* 01. HEADER -------------------
-    c.departments category 
+    c. Header Main, Departments Category 
     -------------*/
 .header-main{
     background-color: var(--secondary-dark-color);
@@ -408,7 +409,7 @@ form.search button {
    color: var(--white-color);
    border-radius: 0 7px 7px 0;
    cursor: pointer;
-   transition: var(--trans-background-color);
+   transition: var(--trans-background);
 }
 form.search button:hover {
     background-color: var(--dark-color);
@@ -427,13 +428,13 @@ form.search button:hover {
     z-index: 1000;
     transform: translateX(-100%);
     visibility: hidden;
-    transition: transform .4s visibility .4s;
+    transition: transform .4s, visibility .4s;
     will-change: transform, visibility;
 }
 .showmenu .site-off {
     transform: translateX(0);
     visibility: visible;
-    transform: transform .4s 0s visibility 0s 0s;
+    transform: transform .4s 0s, visibility 0s 0s;
 }
 .off-canvas{
     width: var(--percent100);
@@ -569,7 +570,7 @@ form.search button:hover {
     font-weight: var(--fw7);
     width: fit-content;
     padding: 4px 10px;
-    background-color: var(--dark-color) !important;
+    background-color: var(--dark-color);
     color: var(--white-color);
     border-radius: 4px;
 }
@@ -639,14 +640,13 @@ form.search button:hover {
 }
 .products .offer ul li {
     position: relative;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     padding: 0.5em;
     line-height: initial;
     color: var(--secondary-dark-color);
     background-color: var(--light-bg-color);
     border-radius: 5px;
-    display: inline-block;
 }
 .products .offer ul li:not(:last-child)::before {
    content: ':';
@@ -692,7 +692,7 @@ form.search button:hover {
 .products .hoverable li:not(.active) {
     transform: translateX(100%);
     opacity: 0;
-    transition: transform .3s opacity .2s;
+    transition: transform .3s, opacity .2s;
 }
 .products .item:hover .hoverable li {
     transform: translateX(0);
@@ -716,6 +716,8 @@ form.search button:hover {
 }
 .products .discount span {
     position: relative;
+    margin-right: 1.3em;
+    margin-top: -1em;
     font-size: var(--font-smaller);
     font-weight: var(--fw5);
     color: var(--white-color);
@@ -724,7 +726,7 @@ form.search button:hover {
     display: flex;
     flex-direction: column;
 }
-.products:where(.big, .mini.one) .content {
+.products:where(.big,.main ,.one) .content {
     gap: 1em;
     margin-top: 1.25em;
 }
@@ -757,7 +759,7 @@ form.search button:hover {
     text-decoration: underline;
 }
 .products .price .current {
-    font-size: calc(1em +1vw);
+    font-size: calc(1em + 1vw);
     color: var(--danger-color);
     margin-right: 0.25em;
 }
@@ -862,7 +864,7 @@ form.search button:hover {
     padding: 1.25em 0 0 1.25em;
     line-height: 1.8;
     border-top: 1px solid var(--border-color);
-    margin-top: 145px;
+    margin-top: 155px;
     color: lightslategrey;
 }
 .products.main .item:hover .content > *:not(.footer) {
@@ -911,7 +913,7 @@ form.search button:hover {
     padding: 1.5em 2.5em;
 }
 .banner h3 {
-    font-size: calc(1em + 0.5em);
+    font-size: calc(1em + 0.5vw);
     font-weight: var(--fw3);
 }
 .banner h3 span {
@@ -939,7 +941,7 @@ form.search button:hover {
    text-decoration: underline;
 }
 /*-----------------
- FOOTER
+ 05. FOOTER
  ------------------ */
 
    /*  FOOTER ----------------
@@ -965,14 +967,14 @@ form.search button:hover {
     max-width: 500px;
     width: var(--percent100);
 }
-      /*  FOOTER--------
+      /* 05. FOOTER--------
           widgets
       --------------*/
 .widgets {
     padding: 3.5em 2.5em;
     background-color: var(--light-bg-color);
 }
-      /* FOOTER--------
+      /*05. FOOTER--------
           Footer Info
       --------------*/
 .footer-info {
@@ -998,14 +1000,11 @@ form.search button:hover {
     background-color: var(--border-color);
 }
 .footer-info .logo a {
-    margin: 0 0 1em -0.75em;
+    margin: 0 0 2em -0.75em;
 }
 .footer-info .mini-text {
     margin-top: 2em;
     text-align: center;
-}
-.flexcol {
-    padding-left: 0%;
 }
 /* --------
  BOTTOM MENU
@@ -1053,7 +1052,7 @@ form.search button:hover {
         Search
       --------------*/ 
 
-.search-botom {
+.search-bottom {
         position: fixed;
         bottom: 60px;
         width: var(--percent100);
@@ -1257,7 +1256,7 @@ form.search button:hover {
 }
 .single-product .variant form p input:checked + label {
     background-color: transparent;
-    border: l solid var(--dark-color);
+    border: 2px solid var(--dark-color);
     color: var(--white-color);
 }
 .products .sizes .variant  label::before {
@@ -1269,6 +1268,7 @@ form.search button:hover {
     left: 0;
     width: var(--percent100);
     height: var(--percent100);
+    font-size: 0.85em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1349,7 +1349,7 @@ form.search button:hover {
 }
 .products .collapse table thead th {
     vertical-align: bottom;
-    border-bottom: l solid var(--dark-color);
+    border-bottom: 2px solid var(--dark-color);
 }
 .products .collapse table :where(th, td) {
     border-bottom: 1px solid var(--border-color);
@@ -1393,7 +1393,7 @@ form.search button:hover {
 }
 .products .review-block-head .rate-sum::before {
     content: '';
-    width: l;
+    width: 2px;
     height: 50px;
     display: block;
     position: absolute;
@@ -1444,8 +1444,8 @@ form.search button:hover {
 }
 .rate-this > input:checked + label:hover,
 .rate-this > input:checked ~ label:hover,
-.rate-this > label:hover ~ input:checked ~label,
-.rate-this > input:checked ~ label:hover  ~label {
+.rate-this > label:hover ~ input:checked ~ label,
+.rate-this > input:checked ~ label:hover  ~ label {
     color: #ffed85;
 }
 .review-form form {
@@ -1556,8 +1556,8 @@ form label {
     width: 8px;
     height: 8px;
     background-color: var(--secondary-dark-color);
-    top: l;
-    left: l;
+    top: 2px;
+    left: 2px;
     opacity: 0;
 }
 .filter-block input:checked + label .checked::before {
@@ -1575,7 +1575,7 @@ form label {
 }
 .bycolor input:checked + label {
     background-color: transparent;
-    border: lpx solid var(--dark-color);
+    border: 2px solid var(--dark-color);
 }
 input[type="range"] {
     -webkit-appearance: none;
@@ -1637,6 +1637,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .cat-navigation ul {
     display: none;
+    margin-top: 0%;
     position: absolute;
     left: 0;
     min-width: var(--percent100);
@@ -2074,7 +2075,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-weight: var(--fw7);
     padding-block-end: 0.5em 1em;
     border-radius: 100px;
-    z-index: 999;
+    z-index: 1000;
     background-color: var(--primary-color);
     color: var(--white-color);
     padding: 0.5em;
@@ -2254,14 +2255,14 @@ nav .mega .products .text-content{
     gap: 0.5em;
     margin-top: 0.5em;
     position: absolute;
-    bottom:4em;
+    bottom: 4em;
     width: var(--percent100);
 }
 nav .mega .products .text-content h4 {
    font-size: 2em;
    font-weight: var(--fw8);
    text-align: center;
-   color: var(--border-color);
+   color: var(--secondary-color);
 }
 .header-main .right {
     max-width: 600px;
@@ -2280,6 +2281,9 @@ nav .mega .products .text-content h4 {
     font-weight: var(--fw5);
     padding: 0 1.5em;
     border-bottom: 1px solid var(--border-color);
+}
+.dpt-menu > ul {
+    padding: 0;
 }
 .dpt-menu .has-child > ul, .dpt-menu .mega {
     position: absolute;
@@ -2313,7 +2317,7 @@ nav .mega .products .text-content h4 {
 .widgets .row {
     flex: 0 0 25%;
     }
-    /* footer */
+/* footer */
 .newsletter .box {
     display: flex;
     justify-content: space-between;
@@ -2331,6 +2335,8 @@ nav .mega .products .text-content h4 {
 .products.one .flexwrap > .row:last-child > .item {
     padding-left: 2em;
 }
+
+ /* Page Category */
 .single-category .holder {
     flex-direction: row;
 }
@@ -2341,7 +2347,7 @@ nav .mega .products .text-content h4 {
     flex: 1 0 71%;
 }
 .single-category .sidebar .filter {
-    padding: 0  1.5em 0 0;
+    padding: 0 1.5em 0 0;
     position: sticky;
     top: 2em;
     box-shadow: none;
