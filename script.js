@@ -1,133 +1,102 @@
-// copy menu for mobile
+const triggerOpen = document.querySelectorAll('[trigger-button]');
+const triggerClose = document.querySelectorAll('[close-button]');
+const overlay = document.querySelector('[data-overlay]');
 
-function copyMenu(){
-  //copy inside .dpt-cat to .departments
-  var dptCategory= document.querySelector('.dpt-cat');
-  var dptPlace = document.querySelector('.departments');
-  dptPlace.innerHTML = dptCategory.innerHTML;
-  //copy inside nav to nav
-  var mainNav = document.querySelector('.header-nav nav');
-  var navPlace = document.querySelector('.off-canvas nav')
-  navPlace.innerHTML = mainNav.innerHTML;
-  //copy .header-top .wrapper to .thetop-nav
-  var topNav = document.querySelector('.header-top .wrapper');
-  var topPlace = document.querySelector('.off-canvas .thetop-nav')
-  topPlace.innerHTML = topNav.innerHTML;
-  }
-  copyMenu();
+for (let i = 0; i < triggerOpen.length; i++) {
+  const currentId = triggerOpen[i].dataset.target,
+  targetEl = document.querySelector(`#${currentId}`)
   
-  //show mobile menu 
-  const menuButton = document.querySelector('.trigger'),
-        closeButton = document.querySelector('.t-close'),
-        addclass = document.querySelector('.site');
-  menuButton.addEventListener('click', function(){
-  addclass.classList.toggle('showmenu')
-  })
-  closeButton.addEventListener('click', function(){
-      addclass.classList.remove('showmenu')
-  })
-  
-  //show sub menu on mobile 
-  const submenu = document.querySelectorAll('.has-child .icon-small');
-  submenu.forEach((menu) => menu.addEventListener('click', toggle));
-  
-  function toggle(e){
-      e.preventDefault();
-      submenu.forEach((item) => item != this ? item.closest('.has-child').classList.remove('expand'):null);
-      if(this.closest('.has-child').classList != 'expand');
-      this.closest('.has-child').classList.toggle('expand');
-  }
-
-//slider
-
-const swiper = new Swiper('.swiper', {
-    loop: true,
-  
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-    },
- 
+  const openData = function () {
+    targetEl.classList.remove('active');
+    overlay.classList.remove('active');
+  };
+  triggerOpen[i].addEventListener('click', function() {
+    targetEl.classList.add('active');
+    overlay.classList.add('active');
   });
+  targetEl.querySelector('[close-button]').addEventListener('click', openData);
+  overlay.addEventListener('click', openData);
+}
 
-  //show search 
-const searchButton = document.querySelector('.t-search'),
-        tClose = document.querySelector('.search-close'),
-        showClass = document.querySelector('.site');
-searchButton.addEventListener('click', function( ) {
-    showClass.classList.toggle('showsearch')
-})      
-tClose.addEventListener('click',function(){
-    showClass.classList.remove('showsearch')
-}) 
-
-//show dpt menu 
-const dptButton = document.querySelector('.dpt-cat .dpt-trigger'),
-      dptClass = document.querySelector('.site');
-dptButton.addEventListener('click', function() {
-         dptClass.classList.toggle('showdpt')
-})
-
-//Product Image Slider
-var productThumb = new Swiper ('.small-image', {
-  loop: true,
-  spaceBetween: 10,
-  slidesPerView:3,
-  freeMode: true,
-  watchSlidesProgrezz: true,
-  breakpoints: {
-    481:{
-      spaceBetween: 32,
-    }
+//mobile-menu submenu 
+const submenu = document.querySelectorAll('.child-trigger');
+submenu.forEach((menu) => menu.addEventListener('click', function(e) {
+  e.preventDefault();
+  submenu.forEach((item) => item != this ? item.closest('.has-child').classList.remove('active') : null);
+  if (this.closest('.has-child').classList != 'active') {
+    this.closest('.has-child').classList.toggle('active');
   }
-});
-var productBig = new Swiper ('.big-image', {
+
+}))
+
+//SORTER
+const sorter = document.querySelector('.sort-list');
+if (sorter) {
+  const sortLi = sorter.querySelectorAll('li');
+  sorter.querySelector('.opt-trigger').addEventListener('click', function() {
+    sorter.querySelector('ul').classList.toggle('show');
+  });
+  sortLi.forEach((item) => item.addEventListener('click',function() {
+    sortLi.forEach((li) => li != this ? li.classList.remove('active') : null);
+
+    this.classList.add('active');
+    sorter.querySelector('.opt-trigger span.value').textContent = this.textContent;
+    sorter.querySelector('ul').classList.toggle('show')
+  }))
+}
+
+
+
+
+
+
+
+
+
+//SLIDER
+
+const swiper = new Swiper('.sliderbox', {
+
   loop: true,
+  effect: 'fade',
   autoHeight: true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+
+});
+
+//carousel 
+const carousel = new Swiper('.carouselbox', {
+
+  spaceBeyween: 30,
+  slidesPerView: 'auto',
+  centeredSlides: true,
+
+  // If we need navigation
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
-  thumbs: {
-    swiper:productThumb,
+  breakpoints: {
+    481: {
+      slidesPerView: 2,
+      slidesPerGroup: 1,
+      centeredSlides: false,
+    },
+    640: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      centeredSlides: false,
+    },
+    992: {
+      slidesPerView: 4,
+      slidesPerGroup: 4,
+      centeredSlides: false,
+    }
   }
-})
 
-//stock products bar width percentage
-var stocks = document.querySelectorAll('.products .stock');
-for (let x = 0; x < stocks.length; x++) {
-  let stock = stocks[x].dataset.stock,
-  available = stocks[x].querySelector('.qty-available').innerHTML,
-  sold = stocks[x].querySelector('.qty-sold').innerHTML,
-  percent = sold*100/stock;
-
-  stocks[x].querySelector('.available').style.width = percent + '%';
-}
-//show cart on click 
-const divtoShow = '.mini-cart';
-const divPopup = document.querySelector(divtoShow);
-const divTrigger = document.querySelector('.cart-trigger');
-
-divTrigger.addEventListener('click',() => {
-    setTimeout(() => {
-      if (!divPopup.classList.contains('show')) {
-        divPopup.classList.add('show');
-      }
-    },250)
-})
-
-//close by click outside
-document.addEventListener('click' , (e) => {
-  const isClosest = e.target.closest(divtoShow);
-  if (!isClosest && divPopup.classList.contains('show')) {
-    divPopup.classList.remove('show')
-  }
-})
-
-//Show modal on load//
-window.onload = function () {
-  document.querySelector('.site').classList.toggle('showmodal') 
-}
-document.querySelector('.modalclose').addEventListener('click', function() {
-  document.querySelector('.site').classList.remove('showmodal')
-})
+});
