@@ -757,9 +757,37 @@ main > div .heading {
     background-color: var(--dark-color);
     color: var(--white-color);
 }
+.sort-data {
+    display: none;
+    animation: var(--fade);
+}
+.sort-data.active {
+    display: block;
+}
 
+/* BANNER */
 
-
+.banner {
+    background-color: var(--light-color);
+    background-image: url(assets/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-origin: border-box;
+}
+.banner .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+.banner .content span {
+    font-size: var(--fs14);
+    text-transform: uppercase;
+}
+.banner h3 {
+    --fs-max: 80px;
+}
 
 
 
@@ -770,6 +798,12 @@ main > div .heading {
     .carousel .dotgrid .item {
         width: 270px;
     }
+}
+@media (min-width: 768px) {
+    .banner {
+        background-size: contain;
+    }
+    
 }
 @media (min-width: 992px) {
     .menu-trigger {
